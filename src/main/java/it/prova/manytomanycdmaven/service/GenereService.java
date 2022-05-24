@@ -1,5 +1,6 @@
 package it.prova.manytomanycdmaven.service;
 
+import java.util.Date;
 import java.util.List;
 
 import it.prova.manytomanycdmaven.dao.genere.GenereDAO;
@@ -26,5 +27,7 @@ public interface GenereService {
 
 	// per injection
 	public void setGenereDAO(GenereDAO genereDAO);
+	
+	public List<Genere> cercaTuttiGeneriConCDPubblicatiTra(Date dataControllo1, Date dataControllo2) throws Exception;
 
 }

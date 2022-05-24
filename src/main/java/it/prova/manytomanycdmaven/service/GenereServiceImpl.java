@@ -1,5 +1,6 @@
 package it.prova.manytomanycdmaven.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -188,6 +189,24 @@ public class GenereServiceImpl implements GenereService {
 			genereDAO.setEntityManager(entityManager);
 			
 			return genereDAO.findByIdFetchingCds(id);
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+	}
+	
+	public List<Genere> cercaTuttiGeneriConCDPubblicatiTra(Date dataControllo1, Date dataControllo2) throws Exception{
+		
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+		
+		try {
+				
+			genereDAO.setEntityManager(entityManager);
+			
+			return genereDAO.findAllTraDueDate(dataControllo1, dataControllo2);
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 			throw e;

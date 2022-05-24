@@ -65,5 +65,7 @@ public class CdDAOImpl implements CdDAO {
 		query.setParameter("idCd", idCdInput);
 		return query.getResultList();
 	}
+	
+
 
 }

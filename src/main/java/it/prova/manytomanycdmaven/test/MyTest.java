@@ -53,8 +53,10 @@ public class MyTest {
 			// DISASTRO!!!
 			// *********************************************************************************
 			testRimozioneCdECheckGeneri(cdServiceInstance, genereServiceInstance);
-			*/
+			
 			testInserisciCDPartendoDaGenere(cdServiceInstance, genereServiceInstance);
+			*/
+			testCercaGeneriConCDTraDueDate(genereServiceInstance);
 
 			System.out.println(
 					"****************************** fine batteria di test ********************************************");
@@ -292,6 +294,19 @@ public class MyTest {
 		Genere genereRicaricato = genereServiceInstance.caricaSingoloElementoEager(cdTestInserimento.getId());
 		
 		System.out.println("testInserisciCDPartendoDaGenere concluso........");
+	}
+	
+	private static void testCercaGeneriConCDTraDueDate(GenereService genereService) throws Exception{
+		System.out.println("testCercaGeneriConCDTraDueDate inizializzato......");
+		
+		Date dataNumero1 = new SimpleDateFormat("yyyy-MM-dd").parse("2019-01-01");
+		Date dataNumero2 = new SimpleDateFormat("yyyy-MM-dd").parse("2020-12-31");
+		
+		List<Genere> listaGeneri = genereService.cercaTuttiGeneriConCDPubblicatiTra(dataNumero1, dataNumero2);
+		for(Genere genereInput : listaGeneri)
+			System.out.println(genereInput);
+		
+		System.out.println("testCercaGeneriConCDTraDueDate concluso......");
 	}
 
 }

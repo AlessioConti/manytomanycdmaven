@@ -82,5 +82,9 @@ public class Genere {
 	public void setCds(Set<Cd> cds) {
 		this.cds = cds;
 	}
+	
+	public String toString() {
+		return "Genere [ID = "+id+", Descrizione= "+descrizione+"]";
+	}
 
 }
