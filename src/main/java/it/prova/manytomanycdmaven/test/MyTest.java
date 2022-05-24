@@ -27,7 +27,7 @@ public class MyTest {
 					"**************************** inizio batteria di test ********************************************");
 			System.out.println(
 					"*************************************************************************************************");
-			/*
+
 			testInserimentoNuovoCd(cdServiceInstance);
 
 			testModificaECheckDateCd(cdServiceInstance);
@@ -53,11 +53,11 @@ public class MyTest {
 			// DISASTRO!!!
 			// *********************************************************************************
 			testRimozioneCdECheckGeneri(cdServiceInstance, genereServiceInstance);
-			
+
 			testInserisciCDPartendoDaGenere(cdServiceInstance, genereServiceInstance);
-			
+
 			testCercaGeneriConCDTraDueDate(genereServiceInstance);
-			*/
+
 			testCercaCDConGeneriLungaDescrizione(cdServiceInstance);
 
 			System.out.println(
@@ -273,52 +273,52 @@ public class MyTest {
 
 		System.out.println(".......testEstraiListaDescrizioneGeneriAssociateAdUnCd fine: PASSED.............");
 	}
-	
+
 	private static void testInserisciCDPartendoDaGenere(CdService cdServiceInstance,
 			GenereService genereServiceInstance) throws Exception {
 		System.out.println("testInserisciCDPartendoDaGenere inizializzato........");
-		
+
 		long nowInMillisecondi = new Date().getTime();
-		
+
 		Genere genereTestInserimento = new Genere("metal" + nowInMillisecondi);
 		genereServiceInstance.inserisciNuovo(genereTestInserimento);
 		if (genereTestInserimento.getId() == null)
 			throw new RuntimeException("testCollegaGenereACd fallito: genere non inserito ");
-		
+
 		Cd cdTestInserimento = new Cd("Una notte" + nowInMillisecondi, "Nuovo Autore" + nowInMillisecondi,
 				new SimpleDateFormat("dd/MM/yyyy").parse("12/01/2020"));
 		cdServiceInstance.inserisciNuovo(cdTestInserimento);
 		if (cdTestInserimento.getId() == null)
 			throw new RuntimeException("testCollegaGenereACd fallito: inserimento cd non riuscito ");
-		
+
 		genereServiceInstance.aggiungiCd(genereTestInserimento, cdTestInserimento);
-		
+
 		Genere genereRicaricato = genereServiceInstance.caricaSingoloElementoEager(cdTestInserimento.getId());
-		
+
 		System.out.println("testInserisciCDPartendoDaGenere concluso........");
 	}
-	
-	private static void testCercaGeneriConCDTraDueDate(GenereService genereService) throws Exception{
+
+	private static void testCercaGeneriConCDTraDueDate(GenereService genereService) throws Exception {
 		System.out.println("testCercaGeneriConCDTraDueDate inizializzato......");
-		
+
 		Date dataNumero1 = new SimpleDateFormat("yyyy-MM-dd").parse("2019-01-01");
 		Date dataNumero2 = new SimpleDateFormat("yyyy-MM-dd").parse("2020-12-31");
-		
+
 		List<Genere> listaGeneri = genereService.cercaTuttiGeneriConCDPubblicatiTra(dataNumero1, dataNumero2);
-		for(Genere genereInput : listaGeneri)
+		for (Genere genereInput : listaGeneri)
 			System.out.println(genereInput);
-		
+
 		System.out.println("testCercaGeneriConCDTraDueDate concluso......");
 	}
-	
-	private static void testCercaCDConGeneriLungaDescrizione(CdService cdServiceInstance) throws Exception{
+
+	private static void testCercaCDConGeneriLungaDescrizione(CdService cdServiceInstance) throws Exception {
 		System.out.println("testCercaCDConGeneriLungaDescrizione inizializzato.......");
-		
+
 		List<Cd> risultatoQuery = cdServiceInstance.cercaTuttiCDConGeneriDallaDescrizioneLunga();
-		
-		for(Cd cdInput : risultatoQuery)
+
+		for (Cd cdInput : risultatoQuery)
 			System.out.println(cdInput);
-		
+
 		System.out.println("testCercaCDConGeneriLungaDescrizione concluso.......");
 	}
 

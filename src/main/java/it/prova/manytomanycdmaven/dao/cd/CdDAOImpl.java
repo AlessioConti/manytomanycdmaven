@@ -65,9 +65,10 @@ public class CdDAOImpl implements CdDAO {
 		query.setParameter("idCd", idCdInput);
 		return query.getResultList();
 	}
-	
-	public List<Cd> findAllConGeneriDallaDescrizioneLunga() throws Exception{
-		TypedQuery<Cd> query = entityManager.createQuery("select distinct c from Cd c join c.generi g where g.descrizione like '__________%'", Cd.class);
+
+	public List<Cd> findAllConGeneriDallaDescrizioneLunga() throws Exception {
+		TypedQuery<Cd> query = entityManager.createQuery(
+				"select distinct c from Cd c join c.generi g where g.descrizione like '__________%'", Cd.class);
 		return query.getResultList();
 	}
 

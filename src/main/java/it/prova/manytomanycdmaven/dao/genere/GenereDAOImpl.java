@@ -45,13 +45,13 @@ public class GenereDAOImpl implements GenereDAO {
 		}
 		entityManager.remove(entityManager.merge(input));
 	}
-	
+
 	@Override
 	public Genere findByDescrizione(String descrizioneInput) throws Exception {
 		TypedQuery<Genere> query = entityManager
 				.createQuery("select g from Genere g where g.descrizione=?1", Genere.class)
 				.setParameter(1, descrizioneInput);
-		
+
 		return query.getResultStream().findFirst().orElse(null);
 	}
 
@@ -59,15 +59,18 @@ public class GenereDAOImpl implements GenereDAO {
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
-	
-	public Genere findByIdFetchingCds(Long id) throws Exception{
-		TypedQuery<Genere> query = entityManager.createQuery("select g from Genere g left join fetch g.cds c where g.id = :idGen", Genere.class);
+
+	public Genere findByIdFetchingCds(Long id) throws Exception {
+		TypedQuery<Genere> query = entityManager
+				.createQuery("select g from Genere g left join fetch g.cds c where g.id = :idGen", Genere.class);
 		query.setParameter("idGen", id);
 		return query.getResultList().stream().findFirst().orElse(null);
 	}
-	
-	public List<Genere> findAllTraDueDate(Date data1, Date data2) throws Exception{
-		TypedQuery<Genere> query = entityManager.createQuery("select g from Genere g join g.cds c where c.dataPubblicazione between :date1 and :date2", Genere.class);
+
+	public List<Genere> findAllTraDueDate(Date data1, Date data2) throws Exception {
+		TypedQuery<Genere> query = entityManager.createQuery(
+				"select g from Genere g join g.cds c where c.dataPubblicazione between :date1 and :date2",
+				Genere.class);
 		query.setParameter("date1", data1);
 		query.setParameter("date2", data2);
 		return query.getResultList();

@@ -151,28 +151,28 @@ public class GenereServiceImpl implements GenereService {
 
 	@Override
 	public void aggiungiCd(Genere genereInstance, Cd cdInstance) throws Exception {
-		
+
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
-		
+
 		try {
 			entityManager.getTransaction().begin();
-			
+
 			genereDAO.setEntityManager(entityManager);
-			
+
 			genereInstance = entityManager.merge(genereInstance);
 			cdInstance = entityManager.merge(cdInstance);
-			
+
 			cdInstance.getGeneri().add(genereInstance);
-			
+
 			entityManager.getTransaction().commit();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			entityManager.getTransaction().rollback();
 			e.printStackTrace();
 			throw e;
 		} finally {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
-		
+
 	}
 
 	@Override
@@ -182,32 +182,32 @@ public class GenereServiceImpl implements GenereService {
 
 	@Override
 	public Genere caricaSingoloElementoEager(Long id) throws Exception {
-		
+
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
-		
+
 		try {
 			genereDAO.setEntityManager(entityManager);
-			
+
 			return genereDAO.findByIdFetchingCds(id);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		} finally {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
 	}
-	
-	public List<Genere> cercaTuttiGeneriConCDPubblicatiTra(Date dataControllo1, Date dataControllo2) throws Exception{
-		
+
+	public List<Genere> cercaTuttiGeneriConCDPubblicatiTra(Date dataControllo1, Date dataControllo2) throws Exception {
+
 		EntityManager entityManager = EntityManagerUtil.getEntityManager();
-		
+
 		try {
-				
+
 			genereDAO.setEntityManager(entityManager);
-			
+
 			return genereDAO.findAllTraDueDate(dataControllo1, dataControllo2);
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		} finally {
