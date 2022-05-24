@@ -247,5 +247,22 @@ public class CdServiceImpl implements CdService {
 			EntityManagerUtil.closeEntityManager(entityManager);
 		}
 	}
+	
+	public List<Cd> cercaTuttiCDConGeneriDallaDescrizioneLunga() throws Exception{
+		EntityManager entityManager = EntityManagerUtil.getEntityManager();
+
+		try {
+			
+			cdDAO.setEntityManager(entityManager);
+			
+			return cdDAO.findAllConGeneriDallaDescrizioneLunga();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			EntityManagerUtil.closeEntityManager(entityManager);
+		}
+	}
 
 }

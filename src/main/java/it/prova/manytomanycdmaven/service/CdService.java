@@ -28,5 +28,7 @@ public interface CdService {
 
 	// per injection
 	public void setCdDAO(CdDAO cdDAO);
+	
+	public List<Cd> cercaTuttiCDConGeneriDallaDescrizioneLunga() throws Exception;
 
 }

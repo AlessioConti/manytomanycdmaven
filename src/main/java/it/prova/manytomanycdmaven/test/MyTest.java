@@ -55,8 +55,10 @@ public class MyTest {
 			testRimozioneCdECheckGeneri(cdServiceInstance, genereServiceInstance);
 			
 			testInserisciCDPartendoDaGenere(cdServiceInstance, genereServiceInstance);
-			*/
+			
 			testCercaGeneriConCDTraDueDate(genereServiceInstance);
+			*/
+			testCercaCDConGeneriLungaDescrizione(cdServiceInstance);
 
 			System.out.println(
 					"****************************** fine batteria di test ********************************************");
@@ -307,6 +309,17 @@ public class MyTest {
 			System.out.println(genereInput);
 		
 		System.out.println("testCercaGeneriConCDTraDueDate concluso......");
+	}
+	
+	private static void testCercaCDConGeneriLungaDescrizione(CdService cdServiceInstance) throws Exception{
+		System.out.println("testCercaCDConGeneriLungaDescrizione inizializzato.......");
+		
+		List<Cd> risultatoQuery = cdServiceInstance.cercaTuttiCDConGeneriDallaDescrizioneLunga();
+		
+		for(Cd cdInput : risultatoQuery)
+			System.out.println(cdInput);
+		
+		System.out.println("testCercaCDConGeneriLungaDescrizione concluso.......");
 	}
 
 }
